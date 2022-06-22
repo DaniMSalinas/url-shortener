@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Tier assignment</title>
+      <script type="text/javascript">
+         function submitForm() {
+             var formElement = document.getElementById('myForm');
+             var data = new FormData(formElement);
+             fetch('/submit', {
+                   method: 'POST',
+                   body: data,
+                 })
+                 .then(response => response.text().full_url)
+                 .then(data => {
+                   document.getElementById("responseArea").innerHTML = data;
+                 })
+                 .catch(error => {
+                   console.error(error);
+                 });
+         }
+      </script>
+   </head>
+   <body>
+      <div class="container">
+         <h1>URL Shortener</h1>
+         <form method="post" id="myForm" class="my-4 form-inline">
+            <label for="urlinput" class="sr-only">Url</label>
+            <input name="urlinput" id="urlinput" required placeholder="url" type="url" class="form-control mr-2 col mr-2"/>
+            <button type="button" class="btn btn-success" onclick="submitForm()">Short</button>
+         </form>
+         <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Full URL</th>
+                    <th>Short URL</th>
+                </tr>
+            </thead>
+            <tr>
+               <td><a href=><div id="responseArea"></div></a></td>
+               <td><a href="https://profile.intra.42.fr/">tier.app/AZfnITXc7rlcY3+cFm4bVg==</a></td>
+            </tr>
+        </table>
+      </div>
+   </body>
+</html>
